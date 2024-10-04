@@ -49,7 +49,7 @@ body {
     justify-content: center;
     text-align: center;
     align-items: center;
-    background-image: linear-gradient(144deg,#AF40FF, #5B42F3 50%,#00DDEB);
+    background: #008c96;
     border: 0;
     border-radius: 8px;
     box-shadow: rgba(151, 65, 252, 0.2) 0 15px 30px -5px;
@@ -69,34 +69,42 @@ body {
     touch-action: manipulation;
     white-space: nowrap;
     cursor: pointer;
+    position: relative;
 }
 
 .farmButtonBlock {
     display: flex;
+    position: relative;
     justify-content: center;
 }
 
-.plus-one {
+/* .canvasButton {
     position: absolute;
-    text-shadow: 0px 0px 2px rgba(78, 234, 64, 0.95);
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    pointer-events: none;
-    font-size: 45px;
-    font-weight: 800;
-    user-select: none;
-    background: linear-gradient(180deg, #cff514 0% #55ef2b 100%);
-    animation: move-up 2s forwards;
+    max-width: 100%;
+    max-height: 100%;
+    z-index: 1
+} */
+
+.farmButtonCaption {
+    display: flex;
+    position: absolute;
+    z-index: 2
 }
 
-@keyframes move-up {
-    0% {
-        opasity: 1;
-        transform: translateY(0);
-    }
-    100% {
-        opasity: 0;
-        transform: translateY(-50px);
-    }
-}
+
+/* .progressBarBlock {
+    width: 100%;
+    height: 100%;
+    position: relative;
+} */
+
+/* .progressBar {
+    width: 0%;
+    height: 100%;
+    background-color: rgba(84, 39, 247, 0.95);
+    text-align: center;
+    line-height: 30px;
+    color: white;
+    overflow: hidden;
+    position: relative;
+} */
