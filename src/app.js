@@ -139,10 +139,18 @@ function processingProgressBar() {
     var hours = remainingTime.getHours();
     var minutes = remainingTime.getMinutes();
 
-    var farmValue = new Intl.NumberFormat("ru", {style: "decimal", minimumFractionDigits: 1, maximumFractionDigits: 1}).format(localStorage.getItem('farmValue'));
-    width = (Number.parseInt(localStorage.getItem('farmValue'))/2160)*100
-    myBar.style.width = width + "%";
-    myBar.textContent = `Фарминг ${farmValue} / 2160\t${hours.toString().padStart(2, '0') + ':' + minutes.toString().padStart(2, '0')}`;
+    var farmValue = localStorage.getItem('farmValue');
+    
+    width = (Number.parseInt(farmValue)/2160)*100
+    if (farmValue > 0)
+    {
+        myBar.style.width = width + "%";
+        myBar.textContent = `Фарминг ${
+            new Intl.NumberFormat("ru", {
+                style: "decimal", minimumFractionDigits: 1, maximumFractionDigits: 1
+            }).format(farmValue)
+        } / 2160\t${hours.toString().padStart(2, '0') + ':' + minutes.toString().padStart(2, '0')}`;
+    }
 }
 
 function dateWithoutTimezone(date) {
