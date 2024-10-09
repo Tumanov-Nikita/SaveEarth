@@ -23,7 +23,6 @@ function timerAction() {
     var currentDate = new Date().getTime();
     var dueDate = getDueDate();
     var direction = Number(localStorage.getItem('direction'));
-    var farmedValue = localStorage.getItem('farmValue');
 
     if (direction <= 0)
     {
@@ -58,6 +57,8 @@ function timerAction() {
             setTimeout(timerAction, 1000);
         }
     }
+
+    processingProgressBar();
 }
 
 farmButton.addEventListener('click', (event) => {
@@ -134,26 +135,14 @@ function getDueDate() {
 }
 
 function processingProgressBar() {
-    var width = 0;
-    var id = setInterval(frame, 10);
+    var remainingTime = dateWithoutTimezone(new Date(getDueDate() - new Date().getTime()));
+    var hours = remainingTime.getHours();
+    var minutes = remainingTime.getMinutes();
 
-    function frame() {
-        if (width >= 100) {
-        clearInterval(id);
-        i = 0;
-        } else {
-            var currentDate = new Date().getTime();
-            var dueDate = Date.parse(localStorage.getItem('dueDate')) ?? new Date().getTime();
-            var remainingTime = dateWithoutTimezone(new Date(dueDate - currentDate));
-            var hours = remainingTime.getHours();
-            var minutes = remainingTime.getMinutes();
-
-            var farmValue = new Intl.NumberFormat("ru", {style: "decimal", minimumFractionDigits: 1, maximumFractionDigits: 1}).format(localStorage.getItem('farmValue'));
-            width = (Number.parseInt(farmValue)/2160)*100
-            myBar.style.width = width + "%";
-            myBar.textContent = `Фарминг ${farmValue} / 2160\t${hours.toString().padStart(2, '0') + ':' + minutes.toString().padStart(2, '0')}`;
-        }
-    }
+    var farmValue = new Intl.NumberFormat("ru", {style: "decimal", minimumFractionDigits: 1, maximumFractionDigits: 1}).format(localStorage.getItem('farmValue'));
+    width = (Number.parseInt(localStorage.getItem('farmValue'))/2160)*100
+    myBar.style.width = width + "%";
+    myBar.textContent = `Фарминг ${farmValue} / 2160\t${hours.toString().padStart(2, '0') + ':' + minutes.toString().padStart(2, '0')}`;
 }
 
 function dateWithoutTimezone(date) {
