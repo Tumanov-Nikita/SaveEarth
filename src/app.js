@@ -8,7 +8,10 @@ var i = 0;
 window.onload = function() {
     setScore(getScore())
     initTimer();
-    processingProgressBar();
+    if (Number(localStorage.getItem('direction')) > 1)
+    {
+        processingProgressBar();
+    }
 }
 
 function initTimer() {
@@ -16,29 +19,42 @@ function initTimer() {
 }
 
 function timerAction() {
-    var startDate = Date.parse(localStorage.getItem('startDate')) ?? new Date().getTime();
+    var startDate = getStartDate();
     var currentDate = new Date().getTime();
-    var dueDate = Date.parse(localStorage.getItem('dueDate')) ?? new Date().getTime();
+    var dueDate = getDueDate();
     var direction = Number(localStorage.getItem('direction'));
-    var initialScore = Number(localStorage.getItem('initialScore')) ?? getScore();
+    var farmedValue = localStorage.getItem('farmValue');
 
-    if (direction < 0)
+    if (direction <= 0)
     {
+        localStorage.setItem('direction', -1);
         setScore(getScore() - 0.01);
         setTimeout(timerAction, 1000);
     }
     else
     {
-        if (dueDate - Date.now() >= 0)
+        if (dueDate - currentDate >= 0)
         {
             var farmValue = Number((currentDate / 1000) - (startDate / 1000)) / 10;
+            if (startDate==currentDate==dueDate)
+            {
+                localStorage.setItem('startDate', startDate);
+            }
+            if (farmValue > 2160)
+            {
+                farmValue = 2160;
+            }
             localStorage.setItem('farmValue', farmValue);
+            setTimeout(timerAction, 1000);
+        }
+        else if (farmValue == 2160)
+        {
+            localStorage.setItem('direction', -1);
+            myBar.textContent = "Забрать 2160 $OZON на баланс";
             setTimeout(timerAction, 1000);
         }
         else
         {
-            localStorage.setItem('direction', -1);
-            myBar.textContent = "Забрать 2160 $OZON на баланс";
             setTimeout(timerAction, 1000);
         }
     }
@@ -49,7 +65,7 @@ farmButton.addEventListener('click', (event) => {
     var direction = Number(localStorage.getItem('direction'));
     if (direction < 0)
     {
-        var farmedValue = localStorage.getItem('farmValue');
+        var farmedValue = localStorage.getItem('farmValue') ?? 0;
         setScore(getScore() + Number.parseInt(farmedValue));
         localStorage.setItem('initialScore', getScore());
         setDeltaScore(1);
@@ -64,9 +80,9 @@ function addMinutesToDate(date, minutes) {
 }
 
 function setDeltaScore(direction) {
-    var currentDate = new Date();
     if (direction > 0)
     {
+        var currentDate = new Date();
         localStorage.setItem('startDate', currentDate)
         var dueDate = addMinutesToDate(currentDate, 360);
         localStorage.setItem('dueDate', dueDate);
@@ -83,7 +99,38 @@ function setScore(scoreValue) {
 }
 
 function getScore() {
-    return Number(localStorage.getItem('score')) ?? 1000
+    var score = Number(localStorage.getItem('score'));
+    if (score == 0)
+    {
+        return 1000;
+    }
+    else {
+        return score;
+    }
+}
+
+function getStartDate() {
+    var startDate = localStorage.getItem('startDate');
+    if (!startDate || startDate == NaN)
+    {
+        return new Date().getTime();
+    }
+    else 
+    {
+        return Date.parse(startDate);
+    }
+}
+
+function getDueDate() {
+    var dueDate = localStorage.getItem('dueDate');
+    if (!dueDate || dueDate == NaN)
+    {
+        return new Date().getTime();
+    }
+    else 
+    {
+        return Date.parse(dueDate);
+    }
 }
 
 function processingProgressBar() {
