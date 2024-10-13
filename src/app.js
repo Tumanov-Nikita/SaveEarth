@@ -3,7 +3,7 @@ const score = document.querySelector('#score');
 const farmButton = document.querySelector('#farmButton');
 const canvas = document.querySelector("#canvasButton");
 const myBar = document.querySelector("#myBar");
-const modif = 360;
+const modif = 1;
 
 window.onload = function() {
     setScore(getScore())
