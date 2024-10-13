@@ -7,44 +7,137 @@
         <link rel="stylesheet" href="styles.css" />
     </head>
     <body>
-        <div class="game">
-            <div class="header">
-                <h1>Save Earth</h1>
+        <div class="header">
+            <h1>Save Earth</h1>
+        </div>
+        <div id="currentScreen">
+            <div id="homeScreen" class="homeScreen">
+                <div class="Count">
+                    <h2 id='score' class="score">1000 $OZON</h2>
+                </div>
+                <div class="circle">
+                    <img id='circle' src="./assets/Planet.png" alt="coin" draggable="false"/>
+                </div>
+                <div id="farmButtonBlock" class="farmButtonBlock">
+                    <button id="farmButton" class="farmButton">
+                        <div id="myBar">Начать фарминг озонового слоя</div>
+                    </button>
+                </div>
+                <button id="testButton" class="testButton" style="display: none;">ТЕСТ</button>
             </div>
-            <div class="Count">
-                <h2 id='score' class="score">1000 $OZON</h2>
+            <div id="tasksScreen" class="tasksScreen">
+                <h2 id="title" class="title">Задачи</h2>
+                <h3>Выполняйте задания и зарабатывайте больше $OZON</h3>
+                <div class="buttonsList">
+                    <button class="defaultButton">
+                        <span class="buttonText">Подпишитесь на наш канал в Telegram</span>
+                        <span class="buttonText">+1000</span>
+                    </button>
+                    <button class="defaultButton">
+                        <span class="buttonText">Пригласите 3 друзей</span>
+                        <span class="buttonText">+3000</span>
+                    </button>
+                    <button class="defaultButton">
+                        <span class="buttonText">Добавьте эмодзи к имени в Telegram</span>
+                        <span class="buttonText">+1000</span>
+                    </button>
+                    <button class="defaultButton">
+                        <span class="buttonText">Подключите TON wallet</span>
+                        <span class="buttonText">+2000</span>
+                    </button>
+                    <button class="defaultButton">
+                        <span class="buttonText">Подпишитесь на наш Youtube канал</span>
+                        <span class="buttonText">+1000</span>
+                    </button>
+                </div>
             </div>
-            <div class="circle">
-                <img id='circle' src="./assets/Planet.png" alt="coin" draggable="false"/>
+            <div id="friendsScreen" class="friendsScreen">
+                <h2 id="title" class="title">Приглашай друзей и зарабатывай!</h2>
+                <h3>Ты и твой друг получите по 500 $OZON или 1000 $OZON, если у друга есть Telegram Premium</h3>
+                <div class="buttonsList">
+                    <button class="defaultButton">
+                        <span class="buttonText">Пригласить друзей</span>
+                    </button>
+                </div>
+                <h2>Твои друзья: 3</h2>
+                <div class="buttonsList">
+                    <button class="defaultButton">
+                        <span class="buttonText">Александр</span>
+                        <span class="buttonText">1550 $OZON</span>
+                    </button>
+                    <button class="defaultButton">
+                        <span class="buttonText">Олег</span>
+                        <span class="buttonText">1500 $OZON</span>
+                    </button>
+                    <button class="defaultButton">
+                        <span class="buttonText">Никита</span>
+                        <span class="buttonText">1600 $OZON</span>
+                    </button>
+                </div>
             </div>
-            <div id="farmButtonBlock" class="farmButtonBlock">
-                <button id="farmButton" class="farmButton">
-                    <div id="myBar">Начать фарминг озонового слоя</div>
-                </button>
+            <div id="ratingScreen" class="ratingScreen">
+                <h2 id="title" class="title">Рейтинг</h2>
+                <div class="buttonsList" style="margin-bottom: 30px;">
+                    <button class="defaultButton">
+                        <span class="buttonText">42. Александр</span>
+                        <span class="buttonText">1 000 000 $OZON</span>
+                    </button>
+                </div>
+                <div class="buttonsList">
+                    <button class="defaultButton">
+                        <span class="buttonText">1. Александр</span>
+                        <span class="buttonText">3 000 000 $OZON</span>
+                    </button>
+                    <button class="defaultButton">
+                        <span class="buttonText">2. Олег</span>
+                        <span class="buttonText">2 500 000 $OZON</span>
+                    </button>
+                    <button class="defaultButton">
+                        <span class="buttonText">3. Никита</span>
+                        <span class="buttonText">2 350 000 $OZON</span>
+                    </button>
+                    <button class="defaultButton">
+                        <span class="buttonText">4. Антон</span>
+                        <span class="buttonText">2 120 000 $OZON</span>
+                    </button>
+                    <button class="defaultButton">
+                        <span class="buttonText">5. Николай</span>
+                        <span class="buttonText">1 985 000 $OZON</span>
+                    </button>
+                </div>
             </div>
-            <button id="testButton" class="testButton" style="display: none;">ТЕСТ</button>
-            <nav class="mobile-nav">
-                <a href="#" class="bloc-icon">
-                  <img src="assets/home.png" alt="Главная">
-                  <span>Главная</span>
-                </a>
-                <a href="#" class="bloc-icon">
-                  <img src="assets/tasks.png" alt="Задачи">
-                  <span>Задачи</span>
-                </a>
-                <a href="#" class="bloc-icon">
-                  <img src="assets/friends.png" alt="Друзья">
-                  <span>Друзья</span>
-                </a>
-                <a href="#" class="bloc-icon">
-                  <img src="assets/rating.png" alt="Рейтинг">
-                  <span>Рейтинг</span>
-                </a>
-                <a href="#" class="bloc-icon">
-                    <img src="assets/wallet.png" alt="Кошелек">
-                    <span>Кошелек</span>
-                </a>
-            </nav>
+            <div id="walletScreen" class="walletScreen">
+                <h2 id="title" class="title">Кошелек</h2>
+                <h3>Подключите ваш кошелек TON и получите +2000 $OZON</h3>
+                <div class="buttonsList">
+                    <button class="defaultButton">
+                        <span class="buttonText">Подключить кошелек</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <nav class="mobile-nav">
+            <a href="#" class="bloc-icon">
+              <img src="assets/home.png" alt="Главная" id="homeButton">
+              <span>Главная</span>
+            </a>
+            <a href="#" class="bloc-icon">
+              <img src="assets/tasks.png" alt="Задачи" id="tasksButton">
+              <span>Задачи</span>
+            </a>
+            <a href="#" class="bloc-icon">
+              <img src="assets/friends.png" alt="Друзья" id="friendsButton">
+              <span>Друзья</span>
+            </a>
+            <a href="#" class="bloc-icon">
+              <img src="assets/rating.png" alt="Рейтинг" id="ratingButton">
+              <span>Рейтинг</span>
+            </a>
+            <a href="#" class="bloc-icon">
+                <img src="assets/wallet.png" alt="Кошелек" id="walletButton">
+                <span>Кошелек</span>
+            </a>
+        </nav>
         <script src="app.js" defer></script>
     </body>
 </html>

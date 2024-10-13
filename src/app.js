@@ -1,8 +1,18 @@
+const homeScreen = document.querySelector("#homeScreen");
+const tasksScreen = document.querySelector("#tasksScreen");
+const friendsScreen = document.querySelector("#friendsScreen");
+const ratingScreen = document.querySelector("#ratingScreen");
+const walletScreen = document.querySelector("#walletScreen");
 const circle = document.querySelector('#circle');
 const score = document.querySelector('#score');
 const farmButton = document.querySelector('#farmButton');
-const canvas = document.querySelector("#canvasButton");
+const homeButton = document.querySelector('#homeButton');
+const tasksButton = document.querySelector('#tasksButton');
+const friendsButton = document.querySelector('#friendsButton');
+const ratingButton = document.querySelector('#ratingButton');
+const walletButton = document.querySelector('#walletButton');
 const myBar = document.querySelector("#myBar");
+const currentScreen = document.querySelector("#currentScreen");
 const modif = 1;
 
 window.onload = function() {
@@ -81,6 +91,75 @@ farmButton.addEventListener('click', (event) => {
         processingProgressBarWidth();
     }
 })
+
+homeButton.addEventListener('click', (event) => {
+    console.log("Кнопка Главная нажата");
+    changeScreen("homeScreen");
+})
+
+tasksButton.addEventListener('click', (event) => {
+    console.log("Кнопка Задачи нажата");
+    changeScreen("tasksScreen");
+})
+
+friendsButton.addEventListener('click', (event) => {
+    console.log("Кнопка Друзья нажата");
+    changeScreen("friendsScreen");
+})
+
+ratingButton.addEventListener('click', (event) => {
+    console.log("Кнопка Рейтинг нажата");
+    changeScreen("ratingScreen");
+})
+
+walletButton.addEventListener('click', (event) => {
+    console.log("Кнопка Кошелек нажата");
+    changeScreen("walletScreen");
+})
+
+function changeScreen(screen) {
+    switch (screen) {
+        case "homeScreen":
+            homeScreen.style.display = "block";
+            tasksScreen.style.display = "none";
+            friendsScreen.style.display = "none";
+            ratingScreen.style.display = "none";
+            walletScreen.style.display = "none";
+            break;
+        case "tasksScreen":
+            homeScreen.style.display = "none";
+            tasksScreen.style.display = "block";
+            friendsScreen.style.display = "none";
+            ratingScreen.style.display = "none";
+            walletScreen.style.display = "none";
+            break;
+        case "friendsScreen":
+            homeScreen.style.display = "none";
+            tasksScreen.style.display = "none";
+            friendsScreen.style.display = "block";
+            ratingScreen.style.display = "none";
+            walletScreen.style.display = "none";
+            break;
+        case "ratingScreen":
+            homeScreen.style.display = "none";
+            tasksScreen.style.display = "none";
+            friendsScreen.style.display = "none";
+            ratingScreen.style.display = "block";
+            walletScreen.style.display = "none";
+            break;
+        case "walletScreen":
+            homeScreen.style.display = "none";
+            tasksScreen.style.display = "none";
+            friendsScreen.style.display = "none";
+            ratingScreen.style.display = "none";
+            walletScreen.style.display = "block";
+            break;
+        default:
+            break;
+    }
+
+}
+
 
 function addMinutesToDate(date, minutes) {
     const minutesToAdd = minutes * 60 * 1000;
