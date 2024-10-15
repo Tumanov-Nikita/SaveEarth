@@ -3,7 +3,6 @@ const tasksScreen = document.querySelector("#tasksScreen");
 const friendsScreen = document.querySelector("#friendsScreen");
 const ratingScreen = document.querySelector("#ratingScreen");
 const walletScreen = document.querySelector("#walletScreen");
-const circle = document.querySelector('#circle');
 const score = document.querySelector('#score');
 const farmButton = document.querySelector('#farmButton');
 const homeButton = document.querySelector('#homeButton');
@@ -12,12 +11,15 @@ const friendsButton = document.querySelector('#friendsButton');
 const ratingButton = document.querySelector('#ratingButton');
 const walletButton = document.querySelector('#walletButton');
 const myBar = document.querySelector("#myBar");
-const currentScreen = document.querySelector("#currentScreen");
 const modif = 1;
+
+
+
+
+
 
 window.onload = function() {
     setScore(getScore())
-    localStorage.setItem('dueDate', getDueDate());
     localStorage.setItem('farmedScore', getScore());
     initTimer();
     if (Number(localStorage.getItem('direction')) > 1)
@@ -38,6 +40,10 @@ function timerAction() {
     var direction = Number(localStorage.getItem('direction'));
     if (direction <= 0)
     {
+        if (startDate==currentDate && currentDate==dueDate)
+        {
+            localStorage.setItem('dueDate', dueDate);
+        }
         var farmedScore = localStorage.getItem('farmedScore');
         var lostScore = Number((currentDate / 1000) - (dueDate / 1000)) / 100;
         setScore(Number(farmedScore) - Number(lostScore));
