@@ -20,7 +20,6 @@ const modif = 1;
 
 window.onload = function() {
     setScore(getScore())
-    localStorage.setItem('farmedScore', getScore());
     initTimer();
     if (Number(localStorage.getItem('direction')) > 1)
     {
@@ -42,11 +41,15 @@ function timerAction() {
     {
         if (startDate==currentDate && currentDate==dueDate)
         {
-            localStorage.setItem('dueDate', dueDate);
+            startDate = addMinutesToDate(currentDate, (Number(localStorage.getItem('farmedScore')) * 100)/ 60)
+            localStorage.setItem('startDate', startDate);
+            localStorage.setItem('farmedScore', getScore());
         }
+       
         var farmedScore = floorToDecimalPlaces(Number(localStorage.getItem('farmedScore')), 2);
-        var lostScore = floorToDecimalPlaces(Number((currentDate / 1000) - (dueDate / 1000)) / 100, 2);
+        var lostScore = floorToDecimalPlaces(Number((currentDate / 1000) - (startDate / 1000)) / 100, 2);
         setScore(floorToDecimalPlaces(Number(farmedScore) - Number(lostScore), 2));
+
         
         localStorage.setItem('direction', -1);
         setTimeout(timerAction, 1000);
@@ -73,6 +76,7 @@ function timerAction() {
             localStorage.setItem('direction', -1);
             localStorage.setItem('farmValue', farmValue);
             localStorage.setItem('farmedScore', getScore());
+            localStorage.setItem('startDate', startDate + 60 * modif * 1000);
             myBar.textContent = `Забрать ${6 * modif} $OZON на баланс`;
             setTimeout(timerAction, 1000);
         }
