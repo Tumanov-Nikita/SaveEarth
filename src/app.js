@@ -44,16 +44,16 @@ function timerAction() {
         {
             localStorage.setItem('dueDate', dueDate);
         }
-        var farmedScore = localStorage.getItem('farmedScore');
-        var lostScore = Number((currentDate / 1000) - (dueDate / 1000)) / 100;
-        setScore(Number(farmedScore) - Number(lostScore));
+        var farmedScore = floorToDecimalPlaces(Number(localStorage.getItem('farmedScore')), 2);
+        var lostScore = floorToDecimalPlaces(Number((currentDate / 1000) - (dueDate / 1000)) / 100, 2);
+        setScore(floorToDecimalPlaces(Number(farmedScore) - Number(lostScore), 2));
         
         localStorage.setItem('direction', -1);
         setTimeout(timerAction, 1000);
     }
     else
     {
-        var farmValue = Number((currentDate / 1000) - (startDate / 1000)) / 10;
+        var farmValue = floorToDecimalPlaces(Number((currentDate / 1000) - (startDate / 1000)) / 10, 2);
         if (dueDate - currentDate >= 0)
         {
             if (startDate==currentDate && currentDate==dueDate)
@@ -95,7 +95,7 @@ farmButton.addEventListener('click', (event) => {
         {
             farmValue = 6 * modif;
         }
-        setScore(getScore() + Number.parseInt(farmValue));
+        setScore(floorToDecimalPlaces(getScore() + Number.parseInt(farmValue), 2));
         localStorage.setItem('farmValue', 0);
         setDeltaScore(1);
         processingProgressBarText();
@@ -275,5 +275,10 @@ function dateWithoutTimezone(date) {
     const tzoffset = dateWithTimezone.getTimezoneOffset() * 60000;
     const withoutTimezone = dateWithTimezone.valueOf() + tzoffset;
     return withoutTimezone;
+}
+
+function floorToDecimalPlaces(number, decimalPlaces) {
+    const multiplier = Math.pow(10, decimalPlaces);
+    return Math.floor(number * multiplier) / multiplier;
 }
 
