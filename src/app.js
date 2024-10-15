@@ -85,7 +85,12 @@ farmButton.addEventListener('click', (event) => {
     if (direction < 0)
     {
         var farmValue = localStorage.getItem('farmValue') ?? 0;
+        if (farmValue > 6 * modif)
+        {
+            farmValue = 6 * modif;
+        }
         setScore(getScore() + Number.parseInt(farmValue));
+        localStorage.setItem('farmValue', 0);
         setDeltaScore(1);
         processingProgressBarText();
         processingProgressBarWidth();
