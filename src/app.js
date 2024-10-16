@@ -19,6 +19,11 @@ const modif = 1;
 
 
 window.onload = function() {
+    let tg = window.Telegram;
+
+    if (tg !== undefined) {
+        tg.WebApp.expand();
+    }
     setScore(getScore())
     initTimer();
     if (Number(localStorage.getItem('direction')) > 1)

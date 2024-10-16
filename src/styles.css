@@ -57,7 +57,7 @@ body {
 
 .mobile-nav a {
     text-decoration: none;
-    display: block;
+    display: flex;
 }
 
 .mobile-nav a:hover {
