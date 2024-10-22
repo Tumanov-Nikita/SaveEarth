@@ -11,7 +11,7 @@ const friendsButton = document.querySelector('#friendsButton');
 const ratingButton = document.querySelector('#ratingButton');
 const walletButton = document.querySelector('#walletButton');
 const myBar = document.querySelector("#myBar");
-const modif = 1;
+const modif = 180;
 
 
 
