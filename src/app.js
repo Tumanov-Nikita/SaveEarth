@@ -1,3 +1,19 @@
+// import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.14.0/firebase-app.js';
+// import { getAuth } from 'https://www.gstatic.com/firebasejs/9.14.0/firebase-auth.js';
+
+// const firebaseConfig = {
+//     apiKey: "AIzaSyCmI-yU-n1inNpfpKJyVyL_1gD_kFpsqzE",
+//     authDomain: "test-clicker-2bb60.firebaseapp.com",
+//     databaseURL: "https://test-clicker-2bb60-default-rtdb.firebaseio.com",
+//     projectId: "test-clicker-2bb60",
+//     storageBucket: "test-clicker-2bb60.appspot.com",
+//     messagingSenderId: "14654563110",
+//     appId: "1:14654563110:web:0ac036e90a45a3b26f17e7"
+// };
+
+// const app = initializeApp(firebaseConfig);
+// const auth = getAuth(app);
+
 const homeScreen = document.querySelector("#homeScreen");
 const tasksScreen = document.querySelector("#tasksScreen");
 const friendsScreen = document.querySelector("#friendsScreen");
@@ -11,18 +27,45 @@ const friendsButton = document.querySelector('#friendsButton');
 const ratingButton = document.querySelector('#ratingButton');
 const walletButton = document.querySelector('#walletButton');
 const myBar = document.querySelector("#myBar");
+
 const modif = 180;
 
-
-
-
+// Telegram.WebApp.onEvent('phone_requested', function(response) {
+//     var p = document.getElementById('userDetails');
+//     p.style.color = 'white';
+//     if (response.status === 'success' && response.phone_number) {
+//         p.innerHTML += '<p>'+response.phone_number+'</p>';
+//     } else {
+//         p.innerHTML += '<p>Не удалось получить номер </p>';
+//     }
+// });
 
 
 window.onload = function() {
-    let tg = window.Telegram;
-
+    Telegram.WebApp.ready();
+    let tg = window.Telegram;    
     if (tg !== undefined) {
         tg.WebApp.expand();
+    }
+    
+    if (localStorage.getItem('phone_requested') != "true")
+    {
+        if (Telegram.WebApp.isVersionAtLeast('1.19.0')) {
+            // Telegram.WebApp.requestContact(function(result) {
+            //     if (result && result.contact && result.contact.phone_number) {
+            //         const phoneDetails = `<p>Phone Number: ${result.contact.phone_number}</p>`;
+            //         document.getElementById('userDetails').innerHTML += phoneDetails;
+            //         localStorage.setItem('phone_requested', true);
+                       
+            //     } else {
+            //         var p = document.getElementById('userDetails');
+            //         p.style.color = 'white';
+            //        // p.innerHTML += '<p>Не удалось получить номер</p>';
+            //     }
+            // });
+        } else {
+            alert('Ваша версия Telegram не поддерживает запрос телефона.');
+        }
     }
     setScore(getScore())
     initTimer();
