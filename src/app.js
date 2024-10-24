@@ -30,16 +30,26 @@ const myBar = document.querySelector("#myBar");
 
 const modif = 180;
 
-// Telegram.WebApp.onEvent('phone_requested', function(response) {
-//     var p = document.getElementById('userDetails');
-//     p.style.color = 'white';
-//     if (response.status === 'success' && response.phone_number) {
-//         p.innerHTML += '<p>'+response.phone_number+'</p>';
-//     } else {
-//         p.innerHTML += '<p>Не удалось получить номер </p>';
+// window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container', {
+//     'size': 'invisible',
+//     'callback': function(response) {
+//         // reCAPTCHA solved, allow signInWithPhoneNumber.
+//         onSignInSubmit();
 //     }
 // });
 
+// function sendVerificationCode(phoneNumber) {
+//     const appVerifier = window.recaptchaVerifier;
+//     firebase.auth().signInWithPhoneNumber(phoneNumber, appVerifier)
+//       .then((confirmationResult) => {
+//         // SMS sent. Prompt user to type the code from the message, then sign the user in with confirmationResult.confirm(code).
+//         window.confirmationResult = confirmationResult;
+//         console.log('Verification code sent');
+//       })
+//       .catch((error) => {
+//         console.error('Error during sign-in:', error);
+//       });
+//   }
 
 window.onload = function() {
     Telegram.WebApp.ready();
@@ -50,22 +60,16 @@ window.onload = function() {
     
     if (localStorage.getItem('phone_requested') != "true")
     {
-        if (Telegram.WebApp.isVersionAtLeast('1.19.0')) {
-            // Telegram.WebApp.requestContact(function(result) {
-            //     if (result && result.contact && result.contact.phone_number) {
-            //         const phoneDetails = `<p>Phone Number: ${result.contact.phone_number}</p>`;
-            //         document.getElementById('userDetails').innerHTML += phoneDetails;
-            //         localStorage.setItem('phone_requested', true);
-                       
-            //     } else {
-            //         var p = document.getElementById('userDetails');
-            //         p.style.color = 'white';
-            //        // p.innerHTML += '<p>Не удалось получить номер</p>';
-            //     }
-            // });
-        } else {
-            alert('Ваша версия Telegram не поддерживает запрос телефона.');
-        }
+        // if (Telegram.WebApp.isVersionAtLeast('1.19.0')) {
+        //     Telegram.WebApp.requestContact(function(sent, event) {
+        //         if (sent) {
+        //             const phoneDetails = `<p>Phone Number: ${event && event.responseUnsafe && event.responseUnsafe.contact && event.responseUnsafe.contact.phone_number ? ': +' + event.responseUnsafe.contact.phone_number : ''}</p>`;
+        //             localStorage.setItem('phone_requested', true); 
+        //         }
+        //     });
+        // } else {
+        //     alert('Ваша версия Telegram не поддерживает запрос телефона.');
+        // }
     }
     setScore(getScore())
     initTimer();
